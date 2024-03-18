@@ -26,4 +26,4 @@ Normal & Names Edited :
 
 
 
-###*Thank you for reading this and using my application. I hope it aids you with ease of access to your appliances*
+*Thank you for reading this and using my application. I hope it aids you with ease of access to your appliances*
