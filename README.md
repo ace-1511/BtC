@@ -23,4 +23,7 @@ Normal & Names Edited :
  - Click the Settings Icon on top-right to change the name of the buttons. (Have a look at Screenshot #2)
  - This app cannot be resized, will be fixed in a later release.
 
-Thank you for reading this and using my application. I hope it aids you with ease of access to your appliances
+
+
+
+####Thank you for reading this and using my application. I hope it aids you with ease of access to your appliances
