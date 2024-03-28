@@ -11,6 +11,8 @@ namespace BtC
     {
         private SerialPort serialPort = new SerialPort();
         public static string COM = "";
+        private Color OnBack = Color.FromArgb(113, 82, 255);
+        private Color OffBack = Color.FromArgb(24, 24, 24);
         bool is1on = false;
         bool is2on = false;
         bool is3on = false;
@@ -32,72 +34,61 @@ namespace BtC
         }
         private void BtC_Load(object sender, EventArgs e)
         {
-            if (btc.Properties.Settings.Default.Btn1 != "")
-            {
-                ONE.Text = btc.Properties.Settings.Default.Btn1;
-            }
-            else if (btc.Properties.Settings.Default.Btn1 == "")
-            {
-                ONE.Text = "1";
-            }
-            if (btc.Properties.Settings.Default.Btn2 != "")
-            {
-                TWO.Text = btc.Properties.Settings.Default.Btn2;
-            }
-            else if (btc.Properties.Settings.Default.Btn2 == "")
-            {
-                TWO.Text = "2";
-            }
-            if (btc.Properties.Settings.Default.Btn3 != "")
-            {
-                THREE.Text = btc.Properties.Settings.Default.Btn3;
-            }
-            else if (btc.Properties.Settings.Default.Btn3 == "")
-            {
-                THREE.Text = "3";
-            }
-            if (btc.Properties.Settings.Default.Btn4 != "")
-            {
-                FOUR.Text = btc.Properties.Settings.Default.Btn4;
-            }
-            else if (btc.Properties.Settings.Default.Btn4 == "")
-            {
-                FOUR.Text = "4";
-            }
-            if (btc.Properties.Settings.Default.Btn5 != "")
-            {
-                FIVE.Text = btc.Properties.Settings.Default.Btn5;
-            }
-            else if (btc.Properties.Settings.Default.Btn5 == "")
-            {
-                FIVE.Text = "5";
-            }
-            if (btc.Properties.Settings.Default.Btn6 != "")
-            {
-                SIX.Text = btc.Properties.Settings.Default.Btn6;
-            }
-            else if (btc.Properties.Settings.Default.Btn6 == "")
-            {
-                SIX.Text = "6";
-            }
-            if (btc.Properties.Settings.Default.Btn7 != "")
-            {
-                SEVEN.Text = btc.Properties.Settings.Default.Btn7;
-            }
-            else if (btc.Properties.Settings.Default.Btn7 == "")
-            {
-                SEVEN.Text = "7";
-            }
-            if (btc.Properties.Settings.Default.Btn8 != "")
-            {
-                EIGHT.Text = btc.Properties.Settings.Default.Btn8;
-            }
-            else if (btc.Properties.Settings.Default.Btn8 == "")
-            {
-                EIGHT.Text= "8";
-            }
+            LoadNames();
         }
 
+        public void LoadNames()
+        {
+            string ONEtext = btc.Properties.Settings.Default.Btn1;
+            string TWOtext = btc.Properties.Settings.Default.Btn2;
+            string THREEtext = btc.Properties.Settings.Default.Btn3;
+            string FOURtext = btc.Properties.Settings.Default.Btn4;
+            string FIVEtext = btc.Properties.Settings.Default.Btn5;
+            string SIXtext = btc.Properties.Settings.Default.Btn6;
+            string SEVENtext = btc.Properties.Settings.Default.Btn7;
+            string EIGHTtext = btc.Properties.Settings.Default.Btn8;
+
+            ONE.Text = ONEtext switch
+            {
+                "" => "1",
+                _ => btc.Properties.Settings.Default.Btn1,
+            };
+            TWO.Text = TWOtext switch
+            {
+                "" => "2",
+                _ => btc.Properties.Settings.Default.Btn2,
+            };
+            THREE.Text = THREEtext switch
+            {
+                "" => "3",
+                _ => btc.Properties.Settings.Default.Btn3,
+            };
+            FOUR.Text = FOURtext switch
+            {
+                "" => "4",
+                _ => btc.Properties.Settings.Default.Btn4,
+            };
+            FIVE.Text = FIVEtext switch
+            {
+                "" => "5",
+                _ => btc.Properties.Settings.Default.Btn5,
+            };
+            SIX.Text = SIXtext switch
+            {
+                "" => "6",
+                _ => btc.Properties.Settings.Default.Btn6,
+            };
+            SEVEN.Text = SEVENtext switch
+            {
+                "" => "7",
+                _ => btc.Properties.Settings.Default.Btn7,
+            };
+            EIGHT.Text = EIGHTtext switch
+            {
+                "" => "8",
+                _ => btc.Properties.Settings.Default.Btn8,
+            };
+        }
         void GetAvailablePorts()
         {
             string[] ports = SerialPort.GetPortNames();
@@ -149,6 +140,7 @@ namespace BtC
                     serialPort.StopBits = StopBits.One;
                     serialPort.Open();
                     COMconnect.Value = 100;
+                    this.Text = "BtC • " + serialPort.PortName;
                 }
             }
             catch (Exception e)
@@ -182,105 +174,95 @@ namespace BtC
         }
         private void OnBtn(int btn)
         {
-            if (btn == 1)
+            switch (btn)
             {
-                ONE.TextColor = Color.WhiteSmoke;
-                ONE.ButtonColor = Color.FromArgb(133, 82, 255);
-                ONE.BorderColor = Color.FromArgb(113, 82, 255);
-            }
-            else if (btn == 2)
-            {
-                TWO.TextColor = Color.WhiteSmoke;
-                TWO.ButtonColor = Color.FromArgb(133, 82, 255);
-                TWO.BorderColor = Color.FromArgb(113, 82, 255);
-            }
-            else if (btn == 3)
-            {
-                THREE.TextColor = Color.WhiteSmoke;
-                THREE.ButtonColor = Color.FromArgb(133, 82, 255);
-                THREE.BorderColor = Color.FromArgb(113, 82, 255);
-            }
-            else if (btn == 4)
-            {
-                FOUR.TextColor = Color.WhiteSmoke;
-                FOUR.ButtonColor = Color.FromArgb(133, 82, 255);
-                FOUR.BorderColor = Color.FromArgb(113, 82, 255);
-            }
-            else if (btn == 5)
-            {
-                FIVE.TextColor = Color.WhiteSmoke;
-                FIVE.ButtonColor = Color.FromArgb(133, 82, 255);
-                FIVE.BorderColor = Color.FromArgb(113, 82, 255);
-            }
-            else if (btn == 6)
-            {
-                SIX.TextColor = Color.WhiteSmoke;
-                SIX.ButtonColor = Color.FromArgb(133, 82, 255);
-                SIX.BorderColor = Color.FromArgb(113, 82, 255);
-            }
-            else if (btn == 7)
-            {
-                SEVEN.TextColor = Color.WhiteSmoke;
-                SEVEN.ButtonColor = Color.FromArgb(133, 82, 255);
-                SEVEN.BorderColor = Color.FromArgb(113, 82, 255);
-            }
-            else if (btn == 8)
-            {
-                EIGHT.TextColor = Color.WhiteSmoke;
-                EIGHT.ButtonColor = Color.FromArgb(133, 82, 255);
-                EIGHT.BorderColor = Color.FromArgb(113, 82, 255);
+                case 1:
+                    ONE.TextColor = Color.WhiteSmoke;
+                    ONE.ButtonColor = OnBack;
+                    ONE.BorderColor = OnBack;
+                    break;
+                case 2:
+                    TWO.TextColor = Color.WhiteSmoke;
+                    TWO.ButtonColor = OnBack;
+                    TWO.BorderColor = OnBack;
+                    break;
+                case 3:
+                    THREE.TextColor = Color.WhiteSmoke;
+                    THREE.ButtonColor = OnBack;
+                    THREE.BorderColor = OnBack;
+                    break;
+                case 4:
+                    FOUR.TextColor = Color.WhiteSmoke;
+                    FOUR.ButtonColor = OnBack;
+                    FOUR.BorderColor = OnBack;
+                    break;
+                case 5:
+                    FIVE.TextColor = Color.WhiteSmoke;
+                    FIVE.ButtonColor = OnBack;
+                    FIVE.BorderColor = OnBack;
+                    break;
+                case 6:
+                    SIX.TextColor = Color.WhiteSmoke;
+                    SIX.ButtonColor = OnBack;
+                    SIX.BorderColor = OnBack;
+                    break;
+                case 7:
+                    SEVEN.TextColor = Color.WhiteSmoke;
+                    SEVEN.ButtonColor = OnBack;
+                    SEVEN.BorderColor = OnBack;
+                    break;
+                case 8:
+                    EIGHT.TextColor = Color.WhiteSmoke;
+                    EIGHT.ButtonColor = OnBack;
+                    EIGHT.BorderColor = OnBack;
+                    break;
             }
         }
 
         private void OffBtn(int btn)
         {
-            if (btn == 1)
+            switch (btn)
             {
-                ONE.TextColor = Color.WhiteSmoke;
-                ONE.ButtonColor = Color.FromArgb(24, 24, 24);
-                ONE.BorderColor = Color.WhiteSmoke;
-            }
-            else if (btn == 2)
-            {
-                TWO.TextColor = Color.WhiteSmoke;
-                TWO.ButtonColor = Color.FromArgb(24, 24, 24);
-                TWO.BorderColor = Color.WhiteSmoke;
-            }
-            else if (btn == 3)
-            {
-                THREE.TextColor = Color.WhiteSmoke;
-                THREE.ButtonColor = Color.FromArgb(24, 24, 24);
-                THREE.BorderColor = Color.WhiteSmoke;
-            }
-            else if (btn == 4)
-            {
-                FOUR.TextColor = Color.WhiteSmoke;
-                FOUR.ButtonColor = Color.FromArgb(24, 24, 24);
-                FOUR.BorderColor = Color.WhiteSmoke;
-            }
-            else if (btn == 5)
-            {
-                FIVE.TextColor = Color.WhiteSmoke;
-                FIVE.ButtonColor = Color.FromArgb(24, 24, 24);
-                FIVE.BorderColor = Color.WhiteSmoke;
-            }
-            else if (btn == 6)
-            {
-                SIX.TextColor = Color.WhiteSmoke;
-                SIX.ButtonColor = Color.FromArgb(24, 24, 24);
-                SIX.BorderColor = Color.WhiteSmoke;
-            }
-            else if (btn == 7)
-            {
-                SEVEN.TextColor = Color.WhiteSmoke;
-                SEVEN.ButtonColor = Color.FromArgb(24, 24, 24);
-                SEVEN.BorderColor = Color.WhiteSmoke;
-            }
-            else if (btn == 8)
-            {
-                EIGHT.TextColor = Color.WhiteSmoke;
-                EIGHT.ButtonColor = Color.FromArgb(24, 24, 24);
-                EIGHT.BorderColor = Color.WhiteSmoke;
+                case 1:
+                    ONE.TextColor = Color.WhiteSmoke;
+                    ONE.ButtonColor = OffBack;
+                    ONE.BorderColor = Color.WhiteSmoke;
+                    break;
+                case 2:
+                    TWO.TextColor = Color.WhiteSmoke;
+                    TWO.ButtonColor = OffBack;
+                    TWO.BorderColor = Color.WhiteSmoke;
+                    break;
+                case 3:
+                    THREE.TextColor = Color.WhiteSmoke;
+                    THREE.ButtonColor = OffBack;
+                    THREE.BorderColor = Color.WhiteSmoke;
+                    break;
+                case 4:
+                    FOUR.TextColor = Color.WhiteSmoke;
+                    FOUR.ButtonColor = OffBack;
+                    FOUR.BorderColor = Color.WhiteSmoke;
+                    break;
+                case 5:
+                    FIVE.TextColor = Color.WhiteSmoke;
+                    FIVE.ButtonColor = OffBack;
+                    FIVE.BorderColor = Color.WhiteSmoke;
+                    break;
+                case 6:
+                    SIX.TextColor = Color.WhiteSmoke;
+                    SIX.ButtonColor = OffBack;
+                    SIX.BorderColor = Color.WhiteSmoke;
+                    break;
+                case 7:
+                    SEVEN.TextColor = Color.WhiteSmoke;
+                    SEVEN.ButtonColor = OffBack;
+                    SEVEN.BorderColor = Color.WhiteSmoke;
+                    break;
+                case 8:
+                    EIGHT.TextColor = Color.WhiteSmoke;
+                    EIGHT.ButtonColor = OffBack;
+                    EIGHT.BorderColor = Color.WhiteSmoke;
+                    break;
             }
         }
 
@@ -298,153 +280,155 @@ namespace BtC
 
         private void ONE_Click(object sender, EventArgs e)
         {
-            if (is1on == false)
+            switch (is1on)
             {
-                is1on = true;
-                SendByte("A");
-                OnBtn(1);
+                case true:
+                    is1on = false;
+                    SendByte("a");
+                    OffBtn(1);
+                    break;
+                case false:
+                    is1on = true;
+                    SendByte("A");
+                    OnBtn(1);
+                    break;
             }
-            else if (is1on == true)
-            {
-                is1on = false;
-                SendByte("a");
-                OffBtn(1);
-            }
-
         }
 
         private void TWO_Click(object sender, EventArgs e)
         {
-            if (is2on == false)
+            switch (is2on)
             {
-                is2on = true;
-                SendByte("B");
-                OnBtn(2);
-            }
-            else if (is2on == true)
-            {
-                is2on = false;
-                SendByte("b");
-                OffBtn(2);
+                case true:
+                    is2on = false;
+                    SendByte("b");
+                    OffBtn(2);
+                    break;
+                case false:
+                    is2on = true;
+                    SendByte("B");
+                    OnBtn(2);
+                    break;
             }
         }
 
         private void THREE_Click(object sender, EventArgs e)
         {
-            if (is3on == false)
+            switch (is3on)
             {
-                is3on = true;
-                SendByte("C");
-                OnBtn(3);
-            }
-            else if (is3on == true)
-            {
-                is3on = false;
-                SendByte("c");
-                OffBtn(3);
+                case true:
+                    is3on = false;
+                    SendByte("c");
+                    OffBtn(3);
+                    break;
+                case false:
+                    is3on = true;
+                    SendByte("C");
+                    OnBtn(3);
+                    break;
             }
         }
 
         private void FOUR_Click(object sender, EventArgs e)
         {
-            if (is4on == false)
+            switch (is4on)
             {
-                is4on = true;
-                SendByte("D");
-                OnBtn(4);
-            }
-            else if (is4on == true)
-            {
-                is4on = false;
-                SendByte("d");
-                OffBtn(4);
+                case true:
+                    is4on = false;
+                    SendByte("d");
+                    OffBtn(4);
+                    break;
+                case false:
+                    is4on = true;
+                    SendByte("D");
+                    OnBtn(4);
+                    break;
             }
         }
 
         private void FIVE_Click(object sender, EventArgs e)
         {
-            if (is5on == false)
+            switch (is5on)
             {
-                is5on = true;
-                SendByte("E");
-                OnBtn(5);
-            }
-            else if (is5on == true)
-            {
-                is5on = false;
-                SendByte("e");
-                OffBtn(5);
+                case true:
+                    is5on = false;
+                    SendByte("e");
+                    OffBtn(5);
+                    break;
+                case false:
+                    is5on = true;
+                    SendByte("E");
+                    OnBtn(5);
+                    break;
             }
         }
 
         private void SIX_Click(object sender, EventArgs e)
         {
-            if (is6on == false)
+            switch (is6on)
             {
-                is6on = true;
-                SendByte("F");
-                OnBtn(6);
-            }
-            else if (is6on == true)
-            {
-                is6on = false;
-                SendByte("f");
-                OffBtn(6);
+                case true:
+                    is6on = false;
+                    SendByte("f");
+                    OffBtn(6);
+                    break;
+                case false:
+                    is6on = true;
+                    SendByte("F");
+                    OnBtn(6);
+                    break;
             }
         }
 
         private void SEVEN_Click(object sender, EventArgs e)
         {
-            if (is7on == false)
+            switch (is7on)
             {
-                is7on = true;
-                SendByte("G");
-                OnBtn(7);
-            }
-            else if (is7on == true)
-            {
-                is7on = false;
-                SendByte("g");
-                OffBtn(7);
+                case true:
+                    is7on = false;
+                    SendByte("g");
+                    OffBtn(7);
+                    break;
+                case false:
+                    is7on = true;
+                    SendByte("G");
+                    OnBtn(7);
+                    break;
             }
         }
 
         private void EIGHT_Click(object sender, EventArgs e)
         {
-            if (is8on == false)
+            switch (is8on)
             {
-                is8on = true;
-                SendByte("H");
-                OnBtn(8);
-            }
-            else if (is8on == true)
-            {
-                is8on = false;
-                SendByte("h");
-                OffBtn(8);
-            }
-        }
-
-        private void BtC_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (MessageBox.Show("You are about to exit !!", "Bye ?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-            {
-                if (serialPort.IsOpen)
-                {
-                    serialPort.Close();
-                    COMconnect.Value = 0;
-                }
-            }
-            else
-            {
-                e.Cancel = true;
+                case true:
+                    is8on = false;
+                    SendByte("h");
+                    OffBtn(8);
+                    break;
+                case false:
+                    is8on = true;
+                    SendByte("H");
+                    OnBtn(8);
+                    break;
             }
         }
-
         private void button1_Click(object sender, EventArgs e)
         {
             Form settings = new Settings_and_About();
+            settings.FormClosed += delegate
+            {
+                LoadNames();
+            };
             settings.ShowDialog();
+        }
+        private void BtC_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (serialPort.IsOpen)
+            {
+                serialPort.Close();
+                COMconnect.Value = 0;
+            }
         }
     }
 }
